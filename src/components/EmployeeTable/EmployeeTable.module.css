@@ -1,0 +1,10 @@
+.mainRow {
+    color: white;
+    background-color: green;
+}
+.mainTable {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
