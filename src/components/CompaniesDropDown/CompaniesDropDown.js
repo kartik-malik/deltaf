@@ -5,21 +5,25 @@ import {
     setFilterDataArray,
     setStatusData,
 } from '../../state/action-creators/filters'
+import classes from './CompaniesDropDown.module.css'
 const CompaniesDropDown = () => {
     const { data } = useSelector((state) => state.companies)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(setCompanies())
-        // dispatch(setFilterDataArray())
     }, [])
-
+    useEffect(() => {
+        setFilterData(data)
+    }, [data])
     // const handleChange = () => {}
     const [filterData, setFilterData] = useState([])
     const [status, setStatus] = useState('active')
+    const [CompaniesContainer, setCompaniesContainer] = useState(false)
     useEffect(() => {
         dispatch(setStatusData(status))
     }, [status])
     useEffect(() => {
+        console.log(filterData)
         dispatch(setFilterDataArray(filterData))
     }, [filterData])
     const handleChange = (compname) => {
@@ -28,11 +32,10 @@ const CompaniesDropDown = () => {
             console.log('fire')
             filterData.splice(index, 1)
             setFilterData([...filterData])
+        } else {
+            console.log('else')
+            setFilterData([...filterData, compname])
         }
-        // } else {
-        //     console.log('else')
-        //     setFilterData([...filterData, compname])
-        // }
     }
     const handleChecked = (compname) => {
         return filterData.indexOf(compname) > -1
@@ -40,37 +43,58 @@ const CompaniesDropDown = () => {
     const selectAll = (e) => {
         if (filterData.length < data.length) setFilterData([...data])
         // else setFilterData([])
-        else setFilterData([])
+        else if (filterData.length == data.length) setFilterData([])
+    }
+    const toggleContainerDropdown = (e) => {
+        // e.stop
+        setCompaniesContainer((prev) => !prev)
     }
     return (
-        <>
-            <div>
-                <label htmlFor="selectAll">{'Select All'}</label>
-                <input type="checkbox" id="selectAll" onClick={selectAll} />
-
-                {data.map((compname) => {
-                    return (
-                        <div key={compname}>
+        <div className={classes.filterComponent}>
+            <div className={classes.companies_dropdown}>
+                <div
+                    className={classes.companies_dropdown_button}
+                    onClick={toggleContainerDropdown}
+                >
+                    Companies {`(${filterData.length})`}
+                </div>
+                {CompaniesContainer && (
+                    <div className={classes.companies_dropdown_container}>
+                        <div className="">
                             <input
                                 type="checkbox"
-                                value={compname}
-                                id={compname}
-                                value={compname}
-                                onChange={() => handleChange(compname)}
-                                checked={handleChecked(compname)}
+                                id="selectAll"
+                                onClick={selectAll}
+                                checked={data.length == filterData.length}
                             />
-                            <label htmlFor={compname}>{compname}</label>
+                            <label htmlFor="selectAll">{'Select All'}</label>
                         </div>
-                    )
-                })}
+                        {data.map((compname) => {
+                            return (
+                                <div key={compname}>
+                                    <input
+                                        type="checkbox"
+                                        value={compname}
+                                        id={compname}
+                                        value={compname}
+                                        onChange={() => handleChange(compname)}
+                                        checked={handleChecked(compname)}
+                                    />
+                                    <label htmlFor={compname}>{compname}</label>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
             </div>
+
             <div>
                 <select onChange={(e) => setStatus(e.target.value)}>
                     <option value={'active'}>Active</option>
                     <option value={'inactive'}>Inactive</option>
                 </select>
             </div>
-        </>
+        </div>
     )
 }
 export default CompaniesDropDown
