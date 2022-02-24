@@ -1,0 +1,27 @@
+.companies_dropdown {
+    position: relative;
+}
+.companies_dropdown_button {
+    /* display: inline-block; */
+    /* position: relative; */
+    padding: 0 1rem;
+}
+.companies_dropdown_button:hover {
+    cursor: pointer;
+}
+.companies_dropdown_container {
+    position: absolute;
+    bottom: -110px;
+    background-color: white;
+    width: max-content;
+    padding: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.filterComponent {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
