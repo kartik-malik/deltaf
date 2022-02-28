@@ -11,7 +11,7 @@
 }
 .companies_dropdown_container {
     position: absolute;
-    bottom: -110px;
+    bottom: -150px;
     background-color: white;
     width: max-content;
     padding: 1rem;
@@ -21,6 +21,7 @@
 .filterComponent {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 3rem;
     margin-top: 3rem;
     margin-bottom: 3rem;

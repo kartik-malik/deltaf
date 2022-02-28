@@ -5,8 +5,10 @@ import {
     setFilterDataArray,
     setStatusData,
 } from '../../state/action-creators/filters'
+import AddCompany from '../AddCompany/AddCompany'
 import AddMember from '../AddMember/Addmember'
 import classes from './CompaniesDropDown.module.css'
+
 const CompaniesDropDown = () => {
     const { data } = useSelector((state) => state.companies)
     const dispatch = useDispatch()
@@ -42,7 +44,8 @@ const CompaniesDropDown = () => {
         return filterData.indexOf(compname) > -1
     }
     const selectAll = (e) => {
-        if (filterData.length < data.length) setFilterData([...data])
+        const onlyName = data.map((item) => item.name)
+        if (filterData.length < data.length) setFilterData([...onlyName])
         // else setFilterData([])
         else if (filterData.length == data.length) setFilterData([])
     }
@@ -52,6 +55,9 @@ const CompaniesDropDown = () => {
     }
     return (
         <div className={classes.filterComponent}>
+            <div>
+                <AddCompany />
+            </div>
             <div>
                 <AddMember />
             </div>

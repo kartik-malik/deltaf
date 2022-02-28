@@ -13,6 +13,9 @@ const reducer = (state = defaultState, action) => {
             }
         case ActionTypes.GET_COMPANIES_ERROR:
             return { loading: false, data: [], error: action.payload.message }
+        case ActionTypes.ADD_COMPANY:
+            return { ...state, data: [...state.data, action.payload.company] }
+
         default:
             return state
     }

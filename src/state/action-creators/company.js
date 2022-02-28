@@ -33,3 +33,25 @@ export const setCompanies = () => {
         }
     }
 }
+export const addCompany = ({ name }) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`${BASE_URL}/company`, { name })
+            dispatch({
+                type: ActionTypes.ADD_COMPANY,
+                payload: {
+                    company: data,
+                },
+            })
+        } catch (error) {
+            dispatch({
+                type: ActionTypes.GET_COMPANIES_ERROR,
+                payload: {
+                    payload: {
+                        message: 'Error',
+                    },
+                },
+            })
+        }
+    }
+}
