@@ -10,7 +10,10 @@ export const setCompanies = () => {
             })
             const { data } = await axios.get(`${BASE_URL}/company`)
             console.log(data)
-            dispatch(setFilterDataArray(data))
+            const companyName = data.map((item) => {
+                return item.name
+            })
+            dispatch(setFilterDataArray(companyName))
             dispatch({
                 type: ActionTypes.GET_COMPANIES,
                 payload: {

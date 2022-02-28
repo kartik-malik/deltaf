@@ -20,6 +20,18 @@ const reducer = function (state = defaultState, action) {
                 error: null,
                 data: null,
             }
+        case ActionTypes.ADD_EMPLOYEE:
+            return {
+                loading: false,
+                error: null,
+                data: [...state.data, action.payload.employ],
+            }
+        case ActionTypes.EDIT_EMPLOYEE:
+            return {
+                loading: false,
+                error: null,
+                data: action.payload.employees,
+            }
         default:
             return state
     }

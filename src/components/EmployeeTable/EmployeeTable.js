@@ -26,6 +26,7 @@ const EmployeeTable = () => {
                         <th>Status</th>
                         <th>Last Updated</th>
                         <th>Notes</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@ const EmployeeTable = () => {
                         filterData(data, companies, status).map((item, i) => {
                             return (
                                 <EmployeeTableRow
+                                    eid={item._id}
                                     item={item}
                                     key={item._id}
                                     index={i}

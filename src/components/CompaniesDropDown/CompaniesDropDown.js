@@ -5,6 +5,7 @@ import {
     setFilterDataArray,
     setStatusData,
 } from '../../state/action-creators/filters'
+import AddMember from '../AddMember/Addmember'
 import classes from './CompaniesDropDown.module.css'
 const CompaniesDropDown = () => {
     const { data } = useSelector((state) => state.companies)
@@ -13,7 +14,7 @@ const CompaniesDropDown = () => {
         dispatch(setCompanies())
     }, [])
     useEffect(() => {
-        setFilterData(data)
+        setFilterData(data.map((item) => item.name))
     }, [data])
     // const handleChange = () => {}
     const [filterData, setFilterData] = useState([])
@@ -51,6 +52,9 @@ const CompaniesDropDown = () => {
     }
     return (
         <div className={classes.filterComponent}>
+            <div>
+                <AddMember />
+            </div>
             <div className={classes.companies_dropdown}>
                 <div
                     className={classes.companies_dropdown_button}
@@ -69,7 +73,8 @@ const CompaniesDropDown = () => {
                             />
                             <label htmlFor="selectAll">{'Select All'}</label>
                         </div>
-                        {data.map((compname) => {
+                        {data.map((comp) => {
+                            let compname = comp.name
                             return (
                                 <div key={compname}>
                                     <input

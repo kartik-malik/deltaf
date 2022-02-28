@@ -1,7 +1,6 @@
 import logo from './logo.svg'
 import './App.css'
-import EmployeeList from './components/EmployeeTable/EmployeeTable'
-import CompaniesDropDown from './components/CompaniesDropDown/CompaniesDropDown'
+
 import { Route, Routes, Navigate } from 'react-router-dom'
 import SignUp from './components/Auth/SignUp'
 import LoginForm from './components/Auth/Login'
@@ -10,6 +9,7 @@ import { setUserData } from './state/action-creators/auth'
 import PrivateRoute from './routes/PrivateRoute'
 import LoginRoute from './routes/LoginRoutes'
 import { useDispatch } from 'react-redux'
+import Home from './components/Home'
 function App() {
     const dispatch = useDispatch()
     if (localStorage.getItem('tokn')) {
@@ -42,8 +42,7 @@ function App() {
                 exact
                 element={
                     <PrivateRoute>
-                        <CompaniesDropDown />
-                        <EmployeeList />
+                        <Home />
                     </PrivateRoute>
                 }
             ></Route>

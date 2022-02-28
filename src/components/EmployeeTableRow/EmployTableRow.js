@@ -1,3 +1,4 @@
+import EditMember from '../EditMember/EditMember'
 import classes from './EmployTableRow.module.css'
 const EmployeeTableRow = ({ item }) => {
     return (
@@ -7,6 +8,7 @@ const EmployeeTableRow = ({ item }) => {
             <td>{item.status ? 'Active' : 'Inactive'}</td>
             <td>{item.updatedAt}</td>
             <td>{item.notes || '-'}</td>
+            <EditMember eid={item._id} item={item} />
         </tr>
     )
 }
