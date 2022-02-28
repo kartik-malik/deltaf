@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addCompany } from '../../state/action-creators/company'
 import classes from '../MemberForm.module.css'
@@ -12,6 +12,11 @@ const AddCompany = () => {
     const toggleModal = () => {
         setModal((prev) => !prev)
     }
+    useEffect(() => {
+        return () => {
+            setName('')
+        }
+    }, [])
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(addCompany({ name })).then(() => {
