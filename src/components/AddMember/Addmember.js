@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addEmploy } from '../../state/action-creators/employee'
 import MemberForm from '../MemberForm'
@@ -11,6 +11,7 @@ const AddMember = () => {
     const toggleModal = () => {
         setAddModal((prev) => !prev)
     }
+
     const addData = ({ name, status, notes, company }) => {
         dispatch(addEmploy({ name, status, notes, company })).then((res) => {
             setAddModal(false)

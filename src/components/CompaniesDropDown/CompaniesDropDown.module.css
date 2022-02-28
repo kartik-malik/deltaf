@@ -11,7 +11,8 @@
 }
 .companies_dropdown_container {
     position: absolute;
-    bottom: -150px;
+    /* bottom: -150px; */
+    transform-origin: translateY(100%);
     background-color: white;
     width: max-content;
     padding: 1rem;

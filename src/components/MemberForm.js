@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import classes from './MemberForm.module.css'
 const MemberForm = (props) => {
@@ -11,6 +11,14 @@ const MemberForm = (props) => {
         e.preventDefault()
         props.submitHandler({ name, status, notes: desc, company })
     }
+    useEffect(() => {
+        return () => {
+            setName('')
+            setStatus(false)
+            setCompany('')
+            setDesc('')
+        }
+    }, [])
     return (
         <>
             <form onSubmit={submitForm}>
