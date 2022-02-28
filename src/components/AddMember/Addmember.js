@@ -12,7 +12,9 @@ const AddMember = () => {
         setAddModal((prev) => !prev)
     }
     const addData = ({ name, status, notes, company }) => {
-        dispatch(addEmploy({ name, status, notes, company }))
+        dispatch(addEmploy({ name, status, notes, company })).then((res) => {
+            setAddModal(false)
+        })
     }
     return (
         <>

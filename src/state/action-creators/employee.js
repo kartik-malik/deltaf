@@ -42,9 +42,12 @@ export const addEmploy = ({ name, status, notes, company }) => {
                 company,
             })
             const data = response.data
+            console.log(data)
             dispatch({
                 type: ActionTypes.ADD_EMPLOYEE,
-                payload: ActionTypes.payload.employ,
+                payload: {
+                    employ: data,
+                },
             })
         } catch (error) {
             dispatch({

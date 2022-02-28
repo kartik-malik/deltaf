@@ -21,6 +21,7 @@ const reducer = function (state = defaultState, action) {
                 data: null,
             }
         case ActionTypes.ADD_EMPLOYEE:
+            console.log([...state.data, action.payload.employ])
             return {
                 loading: false,
                 error: null,

@@ -14,7 +14,9 @@ const AddCompany = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault()
-        dispatch(addCompany({ name }))
+        dispatch(addCompany({ name })).then(() => {
+            setModal(false)
+        })
     }
     return (
         <>
