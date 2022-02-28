@@ -7,7 +7,7 @@ const EditMember = ({ eid, item }) => {
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
     const editMember = (data) => {
-        dispatch(editData({ eid, data }))
+        dispatch(editData({ eid, data })).then(() => setModal(false))
     }
     const toggleModal = () => {
         setModal((prev) => !prev)
