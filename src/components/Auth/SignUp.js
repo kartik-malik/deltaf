@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../constants'
 import { signupActionCreator } from '../../state/action-creators/auth'
@@ -10,6 +10,7 @@ const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const { error } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const submitHandler = (e) => {
         e.preventDefault()
@@ -65,6 +66,7 @@ const SignUp = () => {
                     </Link>
                 </div>
             </form>
+            <p style={{ color: 'red' }}>{error}</p>
         </section>
     )
 }

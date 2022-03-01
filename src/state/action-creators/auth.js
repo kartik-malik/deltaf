@@ -4,6 +4,9 @@ import { ActionTypes } from '../action-types'
 export const signupActionCreator = (data) => {
     return async (dispatch) => {
         try {
+            dispatch({
+                type: ActionTypes.SET_USER_LOADING,
+            })
             const {
                 data: { token, ...userData },
             } = await axios.post(`${BASE_URL}/api/auth/signup`, data)
@@ -16,11 +19,12 @@ export const signupActionCreator = (data) => {
             })
             console.log(userData)
         } catch (err) {
-            console.log(err)
+            console.log(err.response)
             dispatch({
                 type: ActionTypes.SET_USER_ERROR,
                 payload: {
-                    message: err.data.message || 'Failed to signup',
+                    message:
+                        err.response.data.error.message || 'Failed to signup',
                 },
             })
         }
@@ -30,6 +34,9 @@ export const loginCreator = (data) => {
     return async (dispatch, state) => {
         console.log(state())
         try {
+            dispatch({
+                type: ActionTypes.SET_USER_LOADING,
+            })
             const {
                 data: { token, ...userData },
             } = await axios.post(`${BASE_URL}/api/auth/signin`, data)

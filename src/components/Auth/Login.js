@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../constants'
 import { loginCreator } from '../../state/action-creators/auth'
@@ -9,6 +9,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { error } = useSelector((state) => state.auth)
     // if (authCtx.isLoggedIn) {
     //   navigate("/");
     // }
@@ -52,6 +53,7 @@ const LoginForm = () => {
                     </Link>
                 </div>
             </form>
+            <p style={{ color: 'red' }}>{error}</p>
         </section>
     )
 }

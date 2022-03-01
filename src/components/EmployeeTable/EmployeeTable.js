@@ -4,6 +4,7 @@ import { setEmployees } from '../../state/action-creators/employee'
 import classes from './EmployeeTable.module.css'
 import EmployeeTableRow from '../EmployeeTableRow/EmployTableRow'
 import { filterData } from '../../helpers/utility'
+import Loader from '../Ui/loader/Loader'
 const EmployeeTable = () => {
     const {
         data,
@@ -16,35 +17,42 @@ const EmployeeTable = () => {
         dispatch(setEmployees())
     }, [dispatch])
     console.log(data)
+    if (employeesLoading) {
+        return <Loader />
+    }
     return (
         <>
-            <table className={classes.mainTable}>
-                <thead>
-                    <tr className={classes.mainRow}>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Status</th>
-                        <th>Last Updated</th>
-                        <th>Notes</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {!employeesLoading &&
-                        !error &&
-                        data &&
-                        filterData(data, companies, status).map((item, i) => {
-                            return (
-                                <EmployeeTableRow
-                                    eid={item._id}
-                                    item={item}
-                                    key={item._id}
-                                    index={i}
-                                />
-                            )
-                        })}
-                </tbody>
-            </table>
+            {
+                <table className={classes.mainTable}>
+                    <thead>
+                        <tr className={classes.mainRow}>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                            <th>Notes</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {!employeesLoading &&
+                            !error &&
+                            data &&
+                            filterData(data, companies, status).map(
+                                (item, i) => {
+                                    return (
+                                        <EmployeeTableRow
+                                            eid={item._id}
+                                            item={item}
+                                            key={item._id}
+                                            index={i}
+                                        />
+                                    )
+                                }
+                            )}
+                    </tbody>
+                </table>
+            }
         </>
     )
 }
