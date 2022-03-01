@@ -72,8 +72,10 @@ export const setUserData = (userData) => {
     }
 }
 export const setLogout = () => {
-    localStorage.clear()
-    return {
-        type: ActionTypes.SET_USER_LOGOUT,
+    return (dispatch) => {
+        localStorage.clear()
+        dispatch({
+            type: ActionTypes.SET_USER_LOGOUT,
+        })
     }
 }

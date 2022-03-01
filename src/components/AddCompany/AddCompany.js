@@ -10,17 +10,19 @@ const AddCompany = () => {
     const [name, setName] = useState('')
     const dispatch = useDispatch()
     const toggleModal = () => {
+        setName('')
         setModal((prev) => !prev)
     }
     useEffect(() => {
-        return () => {
-            setName('')
-        }
+        // return () => {
+        //     setName('')
+        // }
     }, [])
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(addCompany({ name })).then(() => {
-            setModal(false)
+            // setName('')
+            toggleModal()
         })
     }
     return (

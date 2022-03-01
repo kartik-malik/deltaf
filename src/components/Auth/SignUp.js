@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../constants'
 import { signupActionCreator } from '../../state/action-creators/auth'
+import Loader from '../Ui/loader/Loader'
 import classes from './AuthForm.module.css'
 const SignUp = () => {
     // const submitHandler = () => {};
@@ -10,7 +11,7 @@ const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const { error } = useSelector((state) => state.auth)
+    const { error, loading } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const submitHandler = (e) => {
         e.preventDefault()
@@ -59,7 +60,9 @@ const SignUp = () => {
                     />
                 </div>
                 <div className={classes.actions}>
-                    <button>{'Create Account'}</button>
+                    <button disabled={loading}>
+                        {loading ? <Loader inline={true} /> : 'Create Account'}
+                    </button>
 
                     <Link className={classes.toggle} to="/auth">
                         {'Login with existing account'}

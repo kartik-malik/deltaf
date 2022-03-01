@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setLogout } from '../../state/action-creators/auth'
 import { setCompanies } from '../../state/action-creators/company'
 import {
     setFilterDataArray,
@@ -104,6 +105,15 @@ const CompaniesDropDown = () => {
                     <option value={'active'}>Active</option>
                     <option value={'inactive'}>Inactive</option>
                 </select>
+            </div>
+            <div>
+                <button
+                    onClick={() => {
+                        dispatch(setLogout())
+                    }}
+                >
+                    log out
+                </button>
             </div>
         </div>
     )

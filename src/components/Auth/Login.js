@@ -3,18 +3,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../constants'
 import { loginCreator } from '../../state/action-creators/auth'
+import Loader from '../Ui/loader/Loader'
 import classes from './AuthForm.module.css'
 const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { error } = useSelector((state) => state.auth)
+    const { error, loading } = useSelector((state) => state.auth)
     // if (authCtx.isLoggedIn) {
     //   navigate("/");
     // }
     const submitHandler = (e) => {
         e.preventDefault()
+
         dispatch(loginCreator({ email, password })).then(() => {})
     }
 
@@ -47,12 +49,15 @@ const LoginForm = () => {
                     />
                 </div>
                 <div className={classes.actions}>
-                    <button>{'Login'}</button>
+                    <button disabled={loading}>
+                        {loading ? <Loader inline={true} /> : 'Login'}
+                    </button>
                     <Link to="/signup" className={classes.toggle}>
                         {'Create new account'}
                     </Link>
                 </div>
             </form>
+
             <p style={{ color: 'red' }}>{error}</p>
         </section>
     )
